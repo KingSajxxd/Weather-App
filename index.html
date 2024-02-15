@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather app</title>
+    <!-- Linking Custom CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Creating a Card for display -->
+    <div class="card">
+        <!-- Creating a search bar -->
+        <div class="search">
+            <input type="text" placeholder="Enter City"
+            spellcheck="false">
+            <!-- Creating search icon button -->
+            <button><img src="images/search.png" alt=""></button>
+        </div>
+        <div class="error">
+            <p>Oops! This city does not exist. Try again</p>
+        </div>
+        <!-- Creating a weather display -->
+        <div class="div weather">
+            <img src="images/rain.png" alt="" class="weather-icon">
+            <!-- Temperature in Celcius -->
+            <h1 class="temp">22°C</h1>
+            <!-- City -->
+            <h2 class="city">New York</h2>
+            <div class="details">
+                <!-- Creating 2 columns for humidity and windspeed -->
+                <div class="col">
+                    <img src="images/humidity.png">
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="images/wind.png">
+                    <div>
+                        <p class="wind">15 Km/h</p>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+ 
+
+<script src="script.js"></script>
+</body>
+</html>
