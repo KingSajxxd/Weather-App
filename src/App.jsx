@@ -122,7 +122,7 @@ function App() {
       </div>
       
       <footer style={styles.footer}>
-        <p>Powered by OpenWeather API • {new Date().getFullYear()}</p>
+        <p>Powered by OpenWeather API • {new Date().getFullYear()} • Sajjad Aiyoob</p>
       </footer>
     </div>
   );
