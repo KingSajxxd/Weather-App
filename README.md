@@ -26,7 +26,7 @@ A simple and responsive weather app built using **React** and **Vite**, powered 
 
 ## 🖥️ Demo
 
-> https://weather-app-delta-teal-97.vercel.app/
+> https://weather-app-bay-ten-67.vercel.app/
 
 ---
 
