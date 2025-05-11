@@ -1,7 +1,11 @@
 function WeatherDisplay({ weather, unit }) {
+  // Check if weather data is available, if not, return null
   if (!weather || !weather.weather || weather.weather.length === 0) return null;
 
+  // icon url and description
   const iconUrl = `https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`;
+  
+  // Capitalize first letter of weather description
   const description = weather.weather[0].description;
   const capitalizedDescription = description.charAt(0).toUpperCase() + description.slice(1);
   
@@ -11,12 +15,12 @@ function WeatherDisplay({ weather, unit }) {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
   
-  // Format date
+  // Format date into long format
   const currentDate = new Date();
   const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
 
-  // Get weather background class based on weather condition
+  // Determine the appropriate background theme based on the weather condition
   const getWeatherBackground = () => {
     const id = weather.weather[0].id;
     const icon = weather.weather[0].icon;
@@ -33,8 +37,10 @@ function WeatherDisplay({ weather, unit }) {
     return '';
   };
 
+  // // Render the complete weather card with temperature, description, etc
   return (
     <div className="weather-card" style={{...styles.card, ...styles[getWeatherBackground()]}}>
+      {/* Header section with location and date */}
       <div style={styles.header}>
         <div style={styles.locationDate}>
           <h2 style={styles.location}>
@@ -44,6 +50,7 @@ function WeatherDisplay({ weather, unit }) {
         </div>
       </div>
 
+      {/* Current weather section with temperature, description, etc */}
       <div style={styles.currentWeather}>
         <div style={styles.tempContainer}>
           <p style={styles.temp}>
@@ -60,7 +67,8 @@ function WeatherDisplay({ weather, unit }) {
             <span style={styles.tempMin}>↓ {Math.round(weather.main.temp_min)}°</span>
           </p>
         </div>
-        
+
+        {/* Weather icon and description */}
         <div style={styles.weatherInfo}>
           <img 
             src={iconUrl} 
@@ -71,6 +79,7 @@ function WeatherDisplay({ weather, unit }) {
         </div>
       </div>
 
+      {/* Weather details like wind, humidity, etc. */}
       <div style={styles.details}>
         <div style={styles.detailItem}>
           <span style={styles.detailIcon}>💨</span>
@@ -101,6 +110,7 @@ function WeatherDisplay({ weather, unit }) {
         </div>
       </div>
 
+      {/* Sunrise and sunset times */}
       <div style={styles.sunTimes}>
         <div style={styles.sunTime}>
           <span style={styles.sunIcon}>🌅</span>
