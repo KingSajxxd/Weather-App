@@ -4,15 +4,21 @@ import WeatherDisplay from './components/WeatherDisplay';
 import Forecast from './components/Forecast';
 import PopularCities from './components/PopularCities';
 
+// Store the OpenWeather API key
+const API_KEY = 'fbbcd40a84c00c9a3f0d1feb866c5afe';
+
 function App() {
+  // Core app states
   const [city, setCity] = useState('');
-  const [unit, setUnit] = useState('metric');
+  const [unit, setUnit] = useState('metric'); // Can be 'metric' or 'imperial'
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
+   // light or dark mode
   const [theme, setTheme] = useState('light');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Function to fetch weather data and forecast for a given city
   const fetchWeather = useCallback(async (cityName) => {
     if (!cityName) return;
 
@@ -20,8 +26,9 @@ function App() {
     setError(null);
 
     try {
+      // Fetch current weather data
       const weatherRes = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${unit}&appid=fbbcd40a84c00c9a3f0d1feb866c5afe`
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${unit}&appid=${API_KEY}`
       );
       
       if (!weatherRes.ok) {
@@ -31,11 +38,13 @@ function App() {
       const weatherData = await weatherRes.json();
       setWeather(weatherData);
 
+      // Fetch 3 day forecast data
       const forecastRes = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=${unit}&appid=fbbcd40a84c00c9a3f0d1feb866c5afe`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=${unit}&appid=${API_KEY}`
       );
       const forecastData = await forecastRes.json();
 
+      // Group forecast data by day
       const groupedByDay = {};
       forecastData.list.forEach(item => {
         const date = item.dt_txt.split(' ')[0];
@@ -44,6 +53,7 @@ function App() {
         }
       });
 
+      // Set forecast data for the next three days
       const nextThreeDays = Object.values(groupedByDay).slice(1, 4);
       setForecast(nextThreeDays);
 
@@ -57,10 +67,12 @@ function App() {
     }
   }, [unit]);
 
+  // Set theme to light or dark
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
+  // Fetch weather data when city or unit changes
   useEffect(() => {
     if (city) {
       fetchWeather(city);
@@ -81,6 +93,7 @@ function App() {
       </div>
 
       <div style={styles.cardContainer}>
+        {/* City search input and unit toggle */}
         <SearchBar
           city={city}
           setCity={setCity}
@@ -91,6 +104,7 @@ function App() {
           fetchWeather={fetchWeather}
         />
 
+        {/* Popular cities */}
         <PopularCities
           unit={unit}
           onCitySelect={(selected) => {
@@ -99,6 +113,7 @@ function App() {
           }}
         />
 
+        {/* Loading spinner, error, and weather display */}
         {loading && (
           <div style={styles.loadingContainer}>
             <div style={styles.loadingSpinner}></div>
@@ -106,6 +121,7 @@ function App() {
           </div>
         )}
 
+        {/* Error message if city not found or API fails */}
         {error && (
           <div style={styles.errorContainer}>
             <p>⚠️ {error}</p>
@@ -113,6 +129,7 @@ function App() {
           </div>
         )}
 
+        {/* Weather display and forecast */}
         {weather && !loading && !error && (
           <>
             <WeatherDisplay weather={weather} unit={unit} />
@@ -128,6 +145,7 @@ function App() {
   );
 }
 
+// App styles
 const styles = {
   container: {
     maxWidth: '1000px',
