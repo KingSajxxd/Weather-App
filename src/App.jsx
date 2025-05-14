@@ -5,7 +5,7 @@ import Forecast from './components/Forecast';
 import PopularCities from './components/PopularCities';
 
 // Store the OpenWeather API key
-const API_KEY = 'fbbcd40a84c00c9a3f0d1feb866c5afe';
+const API_KEY = 'your_api_key_here';
 
 function App() {
   // Core app states

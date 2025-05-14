@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const API_KEY = 'fbbcd40a84c00c9a3f0d1feb866c5afe';
+const API_KEY = 'your_api_key_here';
 
 function SearchBar({ city, setCity, setWeather, setForecast, unit, setUnit, fetchWeather }) {
   const [suggestions, setSuggestions] = useState([]);
