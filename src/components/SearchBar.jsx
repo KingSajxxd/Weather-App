@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const API_KEY = 'your_api_key_here';
+const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 function SearchBar({ city, setCity, setWeather, setForecast, unit, setUnit, fetchWeather }) {
   const [suggestions, setSuggestions] = useState([]);

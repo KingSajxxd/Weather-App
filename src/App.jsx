@@ -5,7 +5,7 @@ import Forecast from './components/Forecast';
 import PopularCities from './components/PopularCities';
 
 // Store the OpenWeather API key
-const API_KEY = 'your_api_key_here';
+const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 function App() {
   // Core app states
